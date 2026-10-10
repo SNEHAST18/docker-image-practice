@@ -3,37 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sneha's Little Space</title>
+  <title>Sneha's Little Space ♡</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: "Segoe UI", sans-serif;
-      background: linear-gradient(135deg, #f8f0ff, #e9e5ff, #fff0f5);
+      background: linear-gradient(135deg, #faf1ff, #ece5ff, #fff0f7);
       color: #51416b;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .heart {
+      position: absolute;
+      z-index: -1;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--heart-color);
+      font-size: var(--size);
+      left: var(--left);
+      top: var(--top);
+      opacity: 0;
+      filter: drop-shadow(0 0 5px var(--heart-color))
+              drop-shadow(0 0 13px var(--heart-color));
+      animation: float-heart var(--duration) ease-in-out infinite;
+      animation-delay: var(--delay);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @keyframes float-heart {
+      0% {
+        transform: translate(0, 35px) rotate(-15deg) scale(.75);
+        opacity: 0;
+      }
+      20% { opacity: .8; }
+      50% {
+        transform: translate(var(--drift), -55px) rotate(12deg) scale(1.1);
+        opacity: 1;
+      }
+      80% { opacity: .65; }
+      100% {
+        transform: translate(calc(var(--drift) * -1), -125px)
+                   rotate(-12deg) scale(.85);
+        opacity: 0;
+      }
     }
 
     .welcome {
+      position: relative;
+      z-index: 1;
       width: min(88%, 650px);
       padding: 55px 25px;
       text-align: center;
-      background: rgba(255, 255, 255, 0.58);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, .62);
+      border: 1px solid rgba(255, 255, 255, .95);
       border-radius: 28px;
-      box-shadow: 0 15px 45px rgba(100, 75, 140, 0.12);
+      box-shadow: 0 15px 45px rgba(100, 75, 140, .13);
+      backdrop-filter: blur(8px);
     }
 
-    .sparkle {
-      font-size: 36px;
-    }
+    .sparkle { font-size: 36px; }
 
     h1 {
       font-size: clamp(32px, 7vw, 58px);
@@ -51,10 +88,27 @@
       margin-top: 25px;
       font-size: 14px;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .heart { animation: none; opacity: .55; }
+    }
   </style>
 </head>
 
 <body>
+  <span class="heart" style="--left:8%;--top:25%;--size:42px;--heart-color:#c18bff;--duration:9s;--delay:-2s;--drift:25px">♡</span>
+  <span class="heart" style="--left:22%;--top:75%;--size:28px;--heart-color:#ff8bc9;--duration:11s;--delay:-7s;--drift:-30px">♡</span>
+  <span class="heart" style="--left:83%;--top:30%;--size:50px;--heart-color:#d09aff;--duration:10s;--delay:-5s;--drift:-24px">♡</span>
+  <span class="heart" style="--left:72%;--top:80%;--size:34px;--heart-color:#ff91cf;--duration:8s;--delay:-3s;--drift:32px">♡</span>
+  <span class="heart" style="--left:48%;--top:18%;--size:25px;--heart-color:#bb8bff;--duration:12s;--delay:-9s;--drift:20px">♡</span>
+  <span class="heart" style="--left:93%;--top:68%;--size:30px;--heart-color:#ff80c5;--duration:9s;--delay:-1s;--drift:-18px">♡</span>
+  <span class="heart" style="--left:5%;--top:85%;--size:35px;--heart-color:#e19bff;--duration:13s;--delay:-6s;--drift:28px">♡</span>
+  <span class="heart" style="--left:60%;--top:90%;--size:44px;--heart-color:#ff9bd7;--duration:10s;--delay:-4s;--drift:-25px">♡</span>
+  <span class="heart" style="--left:35%;--top:55%;--size:24px;--heart-color:#b88aff;--duration:8s;--delay:-5s;--drift:22px">♡</span>
+  <span class="heart" style="--left:90%;--top:12%;--size:27px;--heart-color:#ff91cf;--duration:12s;--delay:-8s;--drift:-26px">♡</span>
+  <span class="heart" style="--left:15%;--top:10%;--size:22px;--heart-color:#d69aff;--duration:9s;--delay:-4s;--drift:19px">♡</span>
+  <span class="heart" style="--left:65%;--top:42%;--size:32px;--heart-color:#ff83c8;--duration:11s;--delay:-6s;--drift:26px">♡</span>
+
   <main class="welcome">
     <div class="sparkle">✦ ♡ ✦</div>
     <h1>Hello, Sneha! 🌷</h1>
