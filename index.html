@@ -1,9 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sneha's Little Space</title>
 
-<head><title>Docker Practice</title></head>
-  <body>
-    <h1>Hello sneha</h1>
-    <p>my GitHub Action docker image is working</p>
-  </body>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #f8f0ff, #e9e5ff, #fff0f5);
+      color: #51416b;
+    }
+
+    .welcome {
+      width: min(88%, 650px);
+      padding: 55px 25px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      box-shadow: 0 15px 45px rgba(100, 75, 140, 0.12);
+    }
+
+    .sparkle {
+      font-size: 36px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 7vw, 58px);
+      margin: 18px 0;
+      letter-spacing: -1px;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #796b8c;
+    }
+
+    .note {
+      margin-top: 25px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="welcome">
+    <div class="sparkle">✦ ♡ ✦</div>
+    <h1>Hello, Sneha! 🌷</h1>
+    <p>Welcome to my little corner of the internet.</p>
+    <p>A little code, a little creativity, and lots of dreams.</p>
+    <div class="note">Made with ♡ and Docker</div>
+  </main>
+</body>
 </html>
