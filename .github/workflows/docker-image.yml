@@ -4,6 +4,11 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  schedule:
+    - cron: "30 3 * * 1"
+
+env:
+  DOCKER_IMAGE: snehatiwari18/docker-image-practice
 
 jobs:
   build-and-push:
@@ -22,13 +27,28 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push
+      - name: Show workflow variables
+        run: |
+          echo "Image: $DOCKER_IMAGE"
+          echo "Branch: $GITHUB_REF_NAME"
+
+      - name: Build and push image tags
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: snehatiwari18/docker-image-practice:latest
+          tags: |
+            snehatiwari18/docker-image-practice:latest
+            snehatiwari18/docker-image-practice:v1
+            snehatiwari18/docker-image-practice:sha-${{ github.sha }}
 
+  deploy:
+    needs: build-and-push
+    if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
       - name: Deploy to AWS EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
