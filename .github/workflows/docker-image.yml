@@ -3,7 +3,15 @@ name: Docker Image CI
 on:
   push:
     branches: ["main"]
+
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Docker image tag, e.g. v2 or v3"
+        required: true
+        default: "v2"
+        type: string
+
   schedule:
     - cron: "30 3 * * 1"
 
@@ -31,6 +39,27 @@ jobs:
         run: |
           echo "Image: $DOCKER_IMAGE"
           echo "Branch: $GITHUB_REF_NAME"
+          echo "Event: $GITHUB_EVENT_NAME"
+
+      - name: Choose Docker tag
+        id: vars
+        shell: bash
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            TAG="$INPUT_TAG"
+          else
+            TAG="latest"
+          fi
+
+          if [[ ! "$TAG" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}$ ]]; then
+            echo "Invalid Docker tag: $TAG"
+            exit 1
+          fi
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "Selected tag: $TAG"
 
       - name: Build and push image tags
         uses: docker/build-push-action@v6
@@ -38,9 +67,9 @@ jobs:
           context: .
           push: true
           tags: |
-            snehatiwari18/docker-image-practice:latest
-            snehatiwari18/docker-image-practice:v1
-            snehatiwari18/docker-image-practice:sha-${{ github.sha }}
+            ${{ env.DOCKER_IMAGE }}:${{ steps.vars.outputs.tag }}
+            ${{ env.DOCKER_IMAGE }}:latest
+            ${{ env.DOCKER_IMAGE }}:sha-${{ github.sha }}
 
   deploy:
     needs: build-and-push
