@@ -66,6 +66,8 @@ jobs:
         with:
           context: .
           push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             ${{ env.DOCKER_IMAGE }}:${{ steps.vars.outputs.tag }}
             ${{ env.DOCKER_IMAGE }}:latest
