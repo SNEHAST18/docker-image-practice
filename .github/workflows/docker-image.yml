@@ -88,3 +88,19 @@ jobs:
             sudo docker pull snehatiwari18/docker-image-practice:latest
             sudo docker rm -f sneha-app || true
             sudo docker run -d --name sneha-app -p 80:80 --restart unless-stopped snehatiwari18/docker-image-practice:latest
+practice-if-else:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check selected tag
+        env:
+          IMAGE_TAG: ${{ inputs.tag }}
+        run: |
+          if [ "$IMAGE_TAG" = "v2" ]; then
+            echo "IF condition: Tag is v2"
+          else
+            echo "ELSE condition: Tag is not v2"
+          fi
+
+      - name: Run only when previous step succeeds
+        if: ${{ success() }}
+        run: echo "Previous step succeeded!"  
