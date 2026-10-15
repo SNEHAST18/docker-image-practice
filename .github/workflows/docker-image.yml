@@ -88,7 +88,7 @@ jobs:
             sudo docker pull snehatiwari18/docker-image-practice:latest
             sudo docker rm -f sneha-app || true
             sudo docker run -d --name sneha-app -p 80:80 --restart unless-stopped snehatiwari18/docker-image-practice:latest
-practice-if-else:
+  practice-if-else:
     runs-on: ubuntu-latest
     steps:
       - name: Check selected tag
@@ -103,4 +103,4 @@ practice-if-else:
 
       - name: Run only when previous step succeeds
         if: ${{ success() }}
-        run: echo "Previous step succeeded!"  
+        run: echo "Previous step succeeded!"
