@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Docker image tag, e.g. v2 or v3"
+        description: "Enter Docker image version tag, e.g. v2 or v3"
         required: true
         default: "v2"
         type: string
