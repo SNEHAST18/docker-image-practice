@@ -106,21 +106,21 @@ jobs:
       - name: Run only when previous step succeeds
         if: ${{ success() }}
         run: echo "Previous step succeeded!"
-  practice-failure-always:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Simulate a failure
-        run: |
-          echo "This step will fail intentionally"
-          exit 1
+  #practice-failure-always:
+   # runs-on: ubuntu-latest
+   # steps:
+   #   - name: Simulate a failure
+      #  run: |
+      #    echo "This step will fail intentionally"
+        #  exit 1
 
-      - name: Run only on failure
-        if: ${{ failure() }}
-        run: echo "The previous step failed!"
+    #  - name: Run only on failure
+     #   if: ${{ failure() }}
+       # run: echo "The previous step failed!"
 
-      - name: Always run this step
-        if: ${{ always() }}
-        run: echo "This step runs even after failure!"
+    #  - name: Always run this step
+   #     if: ${{ always() }}
+  #      run: echo "This step runs even after failure!"
   practice-marketplace-cache:
     runs-on: ubuntu-latest
 
