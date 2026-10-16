@@ -148,3 +148,16 @@ jobs:
         run: |
           cat cache-demo/message.txt
           echo "Cache hit: ${{ steps.demo-cache.outputs.cache-hit }}"
+  practice-matrix:
+    name: Matrix test - ${{ matrix.tag }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        tag: [v1, v2, v3]
+
+    steps:
+      - name: Show matrix value
+        run: |
+          echo "Matrix strategy is working!"
+          echo "Current tag: ${{ matrix.tag }}"
