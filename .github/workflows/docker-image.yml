@@ -13,7 +13,7 @@ on:
         type: string
 
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "30 3 * * 1"
 
 env:
   DOCKER_IMAGE: snehatiwari18/docker-image-practice
