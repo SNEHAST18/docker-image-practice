@@ -121,3 +121,30 @@ jobs:
       - name: Always run this step
         if: ${{ always() }}
         run: echo "This step runs even after failure!"
+ practice-marketplace-cache:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Restore Marketplace cache
+        id: demo-cache
+        uses: actions/cache@v5
+        with:
+          path: cache-demo/
+          key: marketplace-cache-${{ runner.os }}-${{ hashFiles('README.md') }}
+          restore-keys: |
+            marketplace-cache-${{ runner.os }}-
+
+      - name: Create sample data on cache miss
+        if: steps.demo-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p cache-demo
+          echo "GitHub Marketplace cache practical" > cache-demo/message.txt
+          echo "Cache miss: sample data created"
+
+      - name: Verify cached data
+        run: |
+          cat cache-demo/message.txt
+          echo "Cache hit: ${{ steps.demo-cache.outputs.cache-hit }}"
